@@ -44,5 +44,29 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    image_file = db.Column(db.String(20), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+
+class PilotRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    action = db.Column(db.String(10), nullable=False)
+    pilot_name = db.Column(db.String(40), nullable=False)
+    pilot_email = db.Column(db.String(120), nullable=False)
+    pilot_password = db.Column(db.String(60), nullable=False)
+    pilot_image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    pilot_bank = db.Column(db.Integer, nullable=False, default=1000)
+    pilot_team = db.Column(db.String(30), nullable=False)
+    status = db.Column(db.String(10), nullable=False, default='pending')
+
+    def __repr__(self):
+        return f"Request('{self.action}', '{self.pilot_name}', '{self.pilot_team}')"
+
+class ItemRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    action = db.Column(db.String(10), nullable=False)
+    item_name = db.Column(db.String(40), nullable=False)
+    item_image_file = db.Column(db.String(20), nullable=False)
+    status = db.Column(db.String(10), nullable=False, default='pending')
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
