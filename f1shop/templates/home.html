@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+    {% block content %}
+    <div class="bg-container">
+        <div class="hero-text">
+            <h1>Welcome to the F1Shop!</h1>
+            <div class="secondary-text">
+                <p>If you don't have an account, why not</p>
+                <a class="btn btn-danger">Register?</a>
+            </div>
+        </div>    
+    </div>
+
+
+    <div class="news">
+        <h1>Latest News</h3>
+        {% for post in posts%}
+        <article class="media content-section">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            </div>
+        </article>
+    {% endfor %}
+    </div>
+{% endblock content %}
