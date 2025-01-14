@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, SelectField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, SelectField, BooleanField, FloatField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, NumberRange
 from f1shop.models import User
 
 class CustomerRegistrationForm(FlaskForm):
@@ -55,3 +55,9 @@ class CustomerUpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('The email is taken. Please choose another one!')
+
+class ItemForm(FlaskForm):
+    item_name = StringField('Item Name', validators=[DataRequired(), Length(min=2, max=20)])
+    picture = FileField('Item Picture', validators=[FileAllowed(['jpg', 'jpeg,' 'png'])])
+    price = FloatField('Price', validators=[DataRequired(), NumberRange(min=1, max=50)])
+    submit = SubmitField('Update')

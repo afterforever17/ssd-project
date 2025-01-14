@@ -6,8 +6,11 @@
             <div class="media-body">
                 <h2 class="account-heading">{{ current_user.username }}</h2>
                 <p class="text-secondary">{{ current_user.email }}</p>
+                <p class="text-secondary">Wallet: {{ current_user.bank }}</p>
+
             </div>
             </div>
+            
             <div class="form-box">
                 <form method="POST" action="" enctype="multipart/form-data" novalidate>
                     {{ form.hidden_tag() }}
@@ -57,6 +60,7 @@
                         {{ form.submit(class="btn btn-outline-info") }}
                     </div>
 
+                    
                 </form>
             </div>
         </div>
